@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Math Loading</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // JavaScript untuk mengarahkan ke halaman play.html setelah 5 detik
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "menu.html"; // Pengalihan otomatis ke halaman play.html
+            }, 5000); // 5000 ms = 5 detik
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+            <div class="loading-screen">
+                <h1>Space Math</h1>
+                <div class="loading-bar-container">
+                    <img src="image/icon spacemath.png" alt="Loading" class="loading-element">
+                    <!-- Bar loading atau animasi lainnya bisa ditambahkan di sini -->
+                    <script src="musik.js" defer></script>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

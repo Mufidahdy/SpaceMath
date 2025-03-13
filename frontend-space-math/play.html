@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Math - Play</title>
+    <link rel="stylesheet" href="play.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="background">
+            <div class="play-screen">
+                <h1>Space Math</h1>
+                <!-- Popup untuk input nama -->
+                <div id="popup" class="popup">
+                    <label for="username">Masukkan Nama:</label>
+                    <input type="text" id="username" placeholder="Nama Pemain" autocomplete="off" autofocus />
+                </div>
+                <a href="Untitled-1.html" id="playButton" style="visibility: hidden;">
+                    <img src="image/play.png" alt="Play Button" class="play-button" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="musik.js" defer></script>
+    <script>
+        // Ambil elemen input dan tombol play
+        const usernameInput = document.getElementById("username");
+        const popup = document.getElementById("popup");
+        const playButton = document.getElementById("playButton");
+
+        // Fokus ke input saat halaman dimuat
+        window.onload = function () {
+            popup.style.display = "block";
+            usernameInput.focus();
+        };
+
+        // Event listener untuk menekan Enter di input
+        usernameInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                const nama_pemain = usernameInput.value.trim(); // Pastikan variabel ini ada
+
+                if (nama_pemain) {
+                    // Simpan nama pemain ke localStorage
+                    localStorage.setItem("nama_pemain", nama_pemain);
+
+                    // Sembunyikan popup dan tampilkan tombol play
+                    popup.style.display = "none";
+                    playButton.style.visibility = "visible";
+
+                    // Kirim data ke backend (sementara menu & skor diisi default dulu)
+                    fetch("http://localhost:5000/submit-score", { // Ubah URL ke /submit-score
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ 
+                            nama_pemain, 
+                            menu: "intro", // Default menu sementara
+                            skor: 0,       // Skor awal
+                            waktu: new Date().toISOString() // Waktu sekarang dalam format ISO
+                        })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Server error: " + response.status);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Nama tersimpan:", data);
+                    })
+                    .catch(error => {
+                        console.error("Error menyimpan nama:", error);
+                    });
+                } else {
+                    alert("Nama tidak boleh kosong!");
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

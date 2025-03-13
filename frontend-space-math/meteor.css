@@ -1,0 +1,171 @@
+body {
+    font-family: 'Chewy', cursive;
+    margin: 0;
+    padding: 0;
+    background: url('image/bg2.png') no-repeat center center;
+    background-size: cover; /* Menjaga gambar latar belakang tetap proporsional */
+    color: white;
+    text-align: center;
+    padding-top: 20px; /* Tambahkan jarak atas untuk keseluruhan body */
+}
+
+/* Progress bar di luar game container */
+#progress-bar-container {
+    width: 80%; 
+    height: 10px; 
+    background-color: #282c34;
+    border-radius: 0px;
+    margin: 0px auto;
+    position: absolute; 
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    z-index: 999; /* Agar tetap di atas elemen lainnya */
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%; /* Dimulai dari 0% */
+    background-color: #f1e94d;
+    border-radius: 0px;
+    transition: width 1s linear; /* Efek transisi */
+}
+
+/* Game container styling */
+.game-container {
+    margin: 50px auto; 
+    width: 60%;
+    background-color: rgba(3, 3, 3, 0.37);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px;
+    font-size: 1.1em;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Question and Answer styling */
+.question {
+    margin: 25px 0; /* Tambahkan margin atas dan bawah untuk pertanyaan */
+    font-size: 1.2em;
+}
+
+input.answer-input {
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    font-size: 1em;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+    margin-left: 10px;
+}
+
+input.answer-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Result styling */
+#result-container h2 {
+    font-size: 1.5em;
+    color: #FFD700;
+    margin-top: 20px; /* Jarak atas untuk hasil */
+}
+
+ /* Gaya untuk progress bar */
+#progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: #282c34;
+    border-radius: 5px;
+    margin-bottom: 20px;  /* Jarak dengan soal */
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%; /* Dimulai dari 0% */
+    background-color: #f1e94d;
+    border-radius: 5px;
+    transition: width 1s linear; /* Efek berjalan */
+}
+
+/* Score Popup Styling */
+.score-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.78);
+    color: rgba(0, 0, 0, 0.57);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0,     0.1);
+}
+
+.score-popup h1 {
+    font-size: 50px;
+    margin: 0;
+    color: #f1e94d;
+}
+
+.score-popup p {
+    margin: 10px 0 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+/* Gaya untuk tombol Lihat Skor */
+#show-score-button {
+    background-color: #f1e94d;
+    color: #282c34;
+    padding: 15px 30px;  /* Ukuran tombol lebih besar */
+    font-size: 22px;     /* Ukuran font lebih besar */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;    /* Memberi jarak antara tombol dan elemen lainnya */
+}
+
+#show-score-button:hover {
+    background-color: #cf9c02;
+}
+
+/* Gaya untuk tombol Back to Menu */
+.back-to-menu {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: url('image/back.png') no-repeat center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.back-to-menu:hover {
+    transform: scale(1.1);
+}

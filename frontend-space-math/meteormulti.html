@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Full Layar</title>
+  <link rel="stylesheet" href="meteormulti.css"> <!-- Link ke CSS -->
+</head>
+<body>
+  <!-- Kontainer Video -->
+  <div class="video-container" id="videoContainer">
+    <!-- Video -->
+    <video id="video" autoplay muted>
+      <source src="image/Meteor.mp4" type="video/mp4">
+      Browser kamu nggak support video, nih.
+    </video>
+    <!-- Tombol Back dan Next -->
+    <button class="back-button" id="backButton" tabindex="0"></button> <!-- Tombol Back -->
+    <button class="next-button" id="nextButton" tabindex="0"></button> <!-- Tombol Next -->
+  </div>
+
+  <!-- Header untuk judul -->
+  <header id="gameHeader" style="display: none;">
+    <h1>Meteor Multiplication</h1>
+  </header>
+
+  <script src="meteormulti.js"></script>
+  <script src="musik.js" defer></script>
+
+</body>
+</html>

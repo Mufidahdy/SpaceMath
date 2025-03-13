@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Math Menu</title>
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+  <!-- Tombol Leaderboard -->
+  <button id="leaderboard-btn">
+    <img src="image/leaderboard.png" alt="Leaderboard" width="60">
+  </button>
+
+  <!-- Pop-up Leaderboard -->
+  <div id="leaderboard-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <h2>Leaderboard</h2>
+      
+      <!-- Dropdown untuk pilih game -->
+      <select id="game-selector">
+        <option value="Memory Orbit">Memory Orbit</option>
+        <option value="Comet Quiz">Comet Quiz</option>
+        <option value="Meteor Multiplication">Meteor Multiplication</option>
+        <option value="Division Galaxy">Division Galaxy</option>
+      </select>
+
+      <ul id="leaderboard-list"></ul>
+      <button id="close-leaderboard">Tutup</button>
+    </div>
+  </div>
+
+  <div class="background">
+    <div class="slider">
+      <div class="slide">
+        <div class="menu-item">
+          <img src="image/planet1.png" alt="Memory Orbit" class="planet-img">
+          <div class="menu-text">Memory Orbit</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="menu-item">
+          <img src="image/planet2.png" alt="Comet Quiz" class="planet-img">
+          <div class="menu-text">Comet Quiz</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="menu-item">
+          <img src="image/planet4.png" alt="Meteor Multiplication" class="planet-img">
+          <div class="menu-text">Meteor Multiplication</div>
+        </div>
+      </div>
+      <div class="slide">
+        <div class="menu-item">
+          <img src="image/planet3.png" alt="Division Galaxy" class="planet-img">
+          <div class="menu-text">Division Galaxy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="menu.js" defer></script>
+  <script src="musik.js" defer></script>
+  <script src="leaderboard.js" defer></script> <!-- Tambahin defer -->
+</body>
+</html>

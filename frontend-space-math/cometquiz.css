@@ -1,0 +1,98 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Chewy', cursive;
+  overflow: hidden;
+}
+
+.cometquiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Memastikan tinggi penuh viewport */
+  background: url('image/bg2.png') no-repeat center center;
+  background-size: cover;
+  color: white;
+}
+
+.cometquiz h2 {
+  font-size: 3em;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.orbit-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 kolom */
+  gap: 98px 50px;
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.star {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.star img {
+  width: 100%; /* Mengatur ukuran gambar agar sesuai dengan elemen */
+  height: auto;
+}
+
+.star span {
+  position: absolute;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgb(25, 1, 82);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.star:hover {
+  transform: scale(1.1); /* Efek saat hover */
+}
+/* Gaya untuk ikon mikrofon */
+.microphone {
+  width: 10px; /* Ukuran ikon lebih kecil */
+  height: 10px;
+  margin-top: 10px;
+  cursor: center;
+  transition: transform 0.2s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* Pusatkan secara horizontal */
+}
+
+.microphone:hover {
+  transform: scale(1.2); /* Efek membesar saat hover */
+}
+/* Gaya untuk tombol Back to Menu */
+.back-to-menu{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background: url('image/back.png') no-repeat center;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-to-menu:hover {
+  transform: scale(1.1);
+}

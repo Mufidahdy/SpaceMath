@@ -1,0 +1,256 @@
+/* Style untuk halaman secara umum */
+body {
+  font-family: 'Chewy', cursive;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 28px;
+  background: url(image/bg2.png) no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Gaya untuk judul */
+h1 {
+  margin: 20px 0;
+  font-size: 36px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Container tabel perkalian */
+.table-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: rgba(0, 0, 0, 0.158);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.column {
+  flex: 1;
+  text-align: center;
+}
+
+.column p {
+  background-color: rgba(255, 255, 255, 0);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.301);
+}
+
+/* Gaya untuk game interaktif */
+#interactive-game {
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
+}
+
+.microphone {
+  cursor: pointer;
+  margin-top: 20px;
+  width: 80px;
+  height: 80px;
+  transition: transform 0.2s;
+}
+
+.microphone:hover {
+  transform: scale(1.1);
+}
+
+/* Tombol 'Lihat Skor' */
+#show-score-button {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 12px 24px;
+  font-size: 20px;
+  background-color: #f1e94d;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#show-score-button:hover {
+  background-color: #cf9c02;
+  transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+/* Konten modal */
+.modal-content {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.close-button {
+  color: #ff4444;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.close-button:hover {
+  color: #c40000;
+}
+
+/* Chart Skor */
+#score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#score-chart {
+  width: 100% !important;
+  max-width: 280px;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Gaya untuk tombol Back to Menu */
+.back-to-menu {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.back-to-menu:hover {
+  transform: scale(1.1);
+}
+
+/* Efek hover pada tombol play */
+#play-button {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#play-button:hover {
+  transform: scale(1.2);
+}
+
+/* Gaya untuk modal chart (tampilan skor) */
+#score-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+#score-modal .modal-content {
+  padding: 30px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+#score-modal h2 {
+  margin: 0;
+}
+
+#score-modal #percentage-text {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+#score-modal #message {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+#score-modal canvas {
+  width: 100% !important;
+  height: auto;
+}
+
+/* Efek transisi tombol lihat skor */
+#show-score-button {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#show-score-button[style*="display: none"] {
+  display: none !important;
+}
+
+
+.score-popup {
+  /* Lebar tetap, letakkan di tengah horizontal */
+  width: 400px;
+  margin: 50px auto;
+  
+  background-color: #000000c2; /* Hitam semi-transparan */
+  color: #00000057;            /* Warna teks agak transparan (bisa diganti #fff jika mau lebih jelas) */
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.score-popup h1 {
+  font-size: 50px;
+  margin: 0;
+  color: #f1e94d; /* Kuning */
+}
+
+.score-popup p {
+  margin: 10px 0 0;
+  font-size: 18px;
+  color: #ffffff; /* Putih */
+}
+
+/* Pastikan canvas di-set fixed size juga, agar chart tidak meluas */
+.score-popup canvas {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}

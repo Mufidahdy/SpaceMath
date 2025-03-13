@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Pembagian</title>
+  <link rel="stylesheet" href="division.css">
+</head>
+<body>
+  <!-- Progress bar container -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div class="quiz-container">
+    <h1>Division Galaxy</h1>
+    <div id="question-box">
+      <p id="question">Soal akan muncul di sini</p>
+      <div id="choices">
+        <!-- Pilihan jawaban akan muncul di sini -->
+      </div>
+    </div>
+
+    <!-- Tombol Hint -->
+    <button id="hint-button">Hint</button>
+    <div id="hint-popup" class="hidden"></div>
+
+    <button id="next-button" class="hidden" disabled>Soal Berikutnya</button>
+    <p id="result" class="hidden">Hasil akan muncul di sini</p>
+  </div>
+
+  <a href="divisiongalaxy.html">
+    <img src="image/back.png" alt="Back to Menu" class="back-to-menu">
+  </a>
+
+  <div id="result" class="hidden"></div>
+
+  <!-- Tombol untuk melihat skor -->
+  <button id="show-score-button">Lihat Skor</button>
+
+  <script src="division.js"></script>
+  <audio id="audioBenar">
+    <source src="image/BENAR.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <audio id="audioSalah">
+    <source src="image/SALAH.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <script src="musik.js" defer></script>
+
+</body>
+</html>

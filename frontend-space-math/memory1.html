@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perkalian</title>
+    <link rel="stylesheet" href="memory1.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fungsi untuk membaca parameter dari URL
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return parseInt(urlParams.get(name)) || 1; // Default ke perkalian 1
+        }
+
+        // Fungsi untuk membuat tabel perkalian
+        function generateMultiplicationTable(number) {
+            const tableContainer = document.getElementById('static-multiplication');
+            const columns = tableContainer.getElementsByClassName('column');
+
+            const firstColumn = columns[0];
+            const secondColumn = columns[1];
+
+            firstColumn.innerHTML = '';
+            secondColumn.innerHTML = '';
+
+            for (let i = 1; i <= 10; i++) {
+                const equation = `${number} x ${i} = ${number * i}`;
+                const element = document.createElement('p');
+                element.textContent = equation;
+
+                if (i <= 5) {
+                    firstColumn.appendChild(element);
+                } else {
+                    secondColumn.appendChild(element);
+                }
+            }
+        }
+
+        // Fungsi untuk menampilkan game interaktif
+        function startGame() {
+            document.getElementById('static-multiplication').style.display = 'none'; // Sembunyikan tabel perkalian
+            document.getElementById('play-button').style.display = 'none'; // Sembunyikan tombol play
+            document.getElementById('interactive-game').style.display = 'block'; // Tampilkan game interaktif
+            document.getElementById('show-score-button').style.display = 'block'; // Tampilkan tombol lihat skor
+        }
+
+        // Menjalankan fungsi saat halaman selesai dimuat
+        window.onload = function () {
+            const perkalian = getUrlParameter('perkalian');
+            generateMultiplicationTable(perkalian);
+            document.title = `Perkalian ${perkalian}`;
+            document.querySelector('h1').textContent = `Perkalian ${perkalian}`;
+            
+            setTimeout(startGame, 10000); // Game dimulai otomatis setelah 10 detik
+        };
+    </script>
+</head>
+<body>
+    <h1>Perkalian</h1>
+
+    <!-- Bagian perkalian statis -->
+    <div id="static-multiplication" class="table-container">
+        <div class="column"></div>
+        <div class="column"></div>
+    </div>
+
+    <!-- Gambar Play untuk memulai game perkalian -->
+    <div style="text-align: center; margin-top: 20px;">
+        <img src="image/playgame.png" alt="Play" id="play-button" style="width: 50px; height: 50px; cursor: pointer;" onclick="startGame()">
+    </div>
+
+    <!-- Bagian untuk Game Perkalian Interaktif -->
+    <div id="interactive-game" class="column" style="display: none;">
+        <div id="question">1 x 1 = ...</div>
+        <img src="image/microphone.png" alt="Microphone" class="microphone" id="microphone" style="width: 100px; height: 100px;">
+    </div>
+
+   <!-- Modal untuk menampilkan Skor -->
+   <div id="score-modal" style="display: none;">
+    <div>
+      <canvas id="score-chart"></canvas>
+    </div>
+    <button id="close-modal">Tutup</button>
+  </div>
+
+    <!-- Tombol Back to Menu -->
+    <a href="memoryorbit.html">
+        <img src="image/back.png" alt="Back to Menu" class="back-to-menu">
+    </a>
+
+    <!-- Tombol untuk melihat skor -->
+    <button id="show-score-button" style="display: none;">Lihat Skor</button>
+
+    <audio id="audioBenar">
+        <source src="image/BENAR.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+      
+    <audio id="audioSalah">
+        <source src="image/SALAH.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+      
+    <script src="memory1.js"></script>
+    <script src="musik.js" defer></script>
+</body>
+</html>

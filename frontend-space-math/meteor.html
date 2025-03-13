@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meteor Multiplication Game</title>
+  <link rel="stylesheet" href="meteor.css">
+  <link rel="stylesheet" href="styles.css"> <!-- Link to the new CSS file -->
+</head>
+<body>
+  <!-- Progress bar di luar game container -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <div class="game-container">
+    <h1>Meteor Multiplication</h1>
+    <div id="question-container">
+      <p>Soal perkalian akan muncul di sini</p>
+    </div>
+    <div id="answer-container">
+      <input type="number" id="answer-input" placeholder="Masukkan jawaban">
+      <button onclick="checkAnswer()">Kirim Jawaban</button>
+    </div>
+    <div id="result-container"></div>
+    
+    <!-- Tombol untuk melihat skor -->
+    <button id="show-score-button">Lihat Skor</button>
+  </div>
+  <!-- Tombol Back to Menu -->
+  <a href="meteormulti.html">
+    <img src="image/back.png" alt="Back to Menu" class="back-to-menu">
+  </a>
+  <audio id="audioBenar">
+    <source src="image/BENAR.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <audio id="audioSalah">
+    <source src="image/SALAH.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="meteor.js"></script>
+  <script src="musik.js" defer></script>
+</body>
+</html>

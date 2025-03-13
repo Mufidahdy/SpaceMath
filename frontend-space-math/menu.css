@@ -1,0 +1,118 @@
+/* Mengatur background */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Chewy', cursive;
+}
+
+.background {
+  background: url('image/bg2.png') no-repeat center center fixed; /* Ganti dengan gambar background */
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mengatur slider */
+.slider {
+  display: flex;
+  overflow-x: auto; /* Mengaktifkan scroll horizontal */
+  scroll-behavior: smooth; /* Scroll yang halus */
+  cursor: grab; /* Menambahkan ikon tangan */
+  -webkit-overflow-scrolling: touch; /* Menambahkan momentum pada perangkat mobile */
+}
+
+.slider::-webkit-scrollbar {
+  display: none; /* Sembunyikan scrollbar */
+}
+
+.slide {
+  flex-shrink: 0;
+  width: 300px; /* Sesuaikan ukuran slide */
+  margin: 0 40px; /* Mengatur jarak antar slide */
+  transition: transform 0.3s ease-in-out; /* Memberi efek smooth saat geser */
+}
+
+.menu-item {
+  text-align: center;
+}
+
+.planet-img {
+  width: 200px; /* Sesuaikan ukuran gambar */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.menu-text {
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Tambahan untuk menahan item saat geser */
+.slider.active {
+  cursor: grabbing;
+}
+/* Styling untuk tombol Leaderboard */
+#leaderboard-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: none; /* Hapus background */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#leaderboard-btn img {
+  width: 50px; /* Sesuaikan ukuran */
+  height: auto;
+}
+
+#leaderboard-btn:hover img {
+  transform: scale(1.1); /* Efek zoom saat hover */
+}
+
+
+/* Pop-up Leaderboard */
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: rgba(0, 0, 0, 0.726);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
+}
+
+.popup-content {
+  position: relative;
+}
+
+#close-leaderboard {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#leaderboard-list {
+  list-style: none;
+  padding: 0;
+}
+
+#leaderboard-list li {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  color: yellow;
+}
+
