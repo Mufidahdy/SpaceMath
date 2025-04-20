@@ -6,7 +6,7 @@ body {
 }
 
 .background {
-  background: url('image/bg2.png') no-repeat center center fixed; /* Ganti dengan gambar background */
+  background: url('image/bg2.png') no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -17,21 +17,21 @@ body {
 /* Mengatur slider */
 .slider {
   display: flex;
-  overflow-x: auto; /* Mengaktifkan scroll horizontal */
-  scroll-behavior: smooth; /* Scroll yang halus */
-  cursor: grab; /* Menambahkan ikon tangan */
-  -webkit-overflow-scrolling: touch; /* Menambahkan momentum pada perangkat mobile */
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
 }
 
 .slider::-webkit-scrollbar {
-  display: none; /* Sembunyikan scrollbar */
+  display: none;
 }
 
 .slide {
   flex-shrink: 0;
-  width: 300px; /* Sesuaikan ukuran slide */
-  margin: 0 40px; /* Mengatur jarak antar slide */
-  transition: transform 0.3s ease-in-out; /* Memberi efek smooth saat geser */
+  width: 300px;
+  margin: 0 40px;
+  transition: transform 0.3s ease-in-out;
 }
 
 .menu-item {
@@ -39,7 +39,7 @@ body {
 }
 
 .planet-img {
-  width: 200px; /* Sesuaikan ukuran gambar */
+  width: 200px;
   height: auto;
   margin-bottom: 10px;
 }
@@ -54,12 +54,34 @@ body {
 .slider.active {
   cursor: grabbing;
 }
-/* Styling untuk tombol Leaderboard */
+
+/* Tombol Petunjuk (paling kanan) */
+#guide-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px; /* Paling kanan */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#guide-btn img {
+  width: 50px;
+  height: auto;
+}
+
+#guide-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* Tombol Leaderboard (di tengah) */
 #leaderboard-btn {
   position: fixed;
   top: 20px;
-  right: 20px;
-  background: none; /* Hapus background */
+  right: 90px; /* Tengah */
+  background: none;
   border: none;
   padding: 0;
   cursor: pointer;
@@ -67,14 +89,34 @@ body {
 }
 
 #leaderboard-btn img {
-  width: 50px; /* Sesuaikan ukuran */
+  width: 50px;
   height: auto;
 }
 
 #leaderboard-btn:hover img {
-  transform: scale(1.1); /* Efek zoom saat hover */
+  transform: scale(1.1);
 }
 
+/* Tombol Musik (paling kiri) */
+#music-btn {
+  position: fixed;
+  top: 20px;
+  right: 130px; /* Geser ke kiri lebih banyak */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#music-btn img {
+  width: 50px;
+  height: auto;
+}
+
+#music-btn:hover img {
+  transform: scale(1.1);
+}
 
 /* Pop-up Leaderboard */
 .popup {
@@ -116,3 +158,42 @@ body {
   color: yellow;
 }
 
+/* Pop-up Petunjuk */
+#guide-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: left;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+#guide-popup h3 {
+  margin-top: 0;
+  text-align: center;
+}
+
+#guide-popup ol {
+  padding-left: 20px;
+}
+
+#guide-popup li {
+  margin-bottom: 10px;
+}
+
+#close-guide {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}

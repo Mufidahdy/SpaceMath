@@ -13,24 +13,40 @@
     <img src="image/leaderboard.png" alt="Leaderboard" width="60">
   </button>
 
+  <!-- Tombol Petunjuk -->
+  <button id="guide-btn">
+    <img src="image/petunjuk.png" alt="Petunjuk" width="60">
+  </button>
+
   <!-- Pop-up Leaderboard -->
   <div id="leaderboard-popup" class="popup" style="display: none;">
     <div class="popup-content">
       <h2>Leaderboard</h2>
-      
-      <!-- Dropdown untuk pilih game -->
       <select id="game-selector">
         <option value="Memory Orbit">Memory Orbit</option>
         <option value="Comet Quiz">Comet Quiz</option>
         <option value="Meteor Multiplication">Meteor Multiplication</option>
         <option value="Division Galaxy">Division Galaxy</option>
       </select>
-
       <ul id="leaderboard-list"></ul>
       <button id="close-leaderboard">Tutup</button>
     </div>
   </div>
 
+  <!-- Pop-up Petunjuk -->
+  <div id="guide-popup" class="popup" style="display: none;">
+    <div class="popup-content">
+      <button id="close-guide">&times;</button>
+      <h3>Petunjuk</h3>
+      <ol>
+        <li>Pilih salah satu menu yang kamu ingin coba.</li>
+        <li>Setiap game punya cara bermain yang seru dan berbeda.</li>
+        <li>Skor kamu bisa langsung masuk leaderboard, lho!</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Menu Slider -->
   <div class="background">
     <div class="slider">
       <div class="slide">
@@ -60,8 +76,25 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script src="menu.js" defer></script>
   <script src="musik.js" defer></script>
-  <script src="leaderboard.js" defer></script> <!-- Tambahin defer -->
+  <script src="leaderboard.js" defer></script>
+
+  <script>
+    // Petunjuk popup
+    const guideBtn = document.getElementById("guide-btn");
+    const guidePopup = document.getElementById("guide-popup");
+    const closeGuide = document.getElementById("close-guide");
+
+    guideBtn.addEventListener("click", () => {
+      guidePopup.style.display = "block";
+    });
+
+    closeGuide.addEventListener("click", () => {
+      guidePopup.style.display = "none";
+    });
+  </script>
+
 </body>
 </html>

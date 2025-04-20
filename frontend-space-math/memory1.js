@@ -127,6 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const showScoreButton = document.getElementById("show-score-button");
   const scoreModal = document.getElementById("score-modal");
   const closeModalButton = document.getElementById("close-modal");
+  const voiceConfirmation = document.getElementById("voice-confirmation");
+const heardAnswer = document.getElementById("heard-answer");
+const confirmYes = document.getElementById("confirm-yes");
+const confirmRetry = document.getElementById("confirm-retry");
+
+let tempAnswer = null;
+
 
   let questions = [];
   let currentQuestionIndex = 0;
@@ -298,10 +305,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recognition.onresult = (event) => {
           let spokenAnswer = event.results[0][0].transcript.trim().toLowerCase();
-          console.log(`Jawaban yang terdengar: ${spokenAnswer}`);
           let numericAnswer = wordToNumber(spokenAnswer);
-          checkAnswer(numericAnswer);
+        
+          console.log(`Jawaban yang terdengar: ${spokenAnswer} (diubah jadi ${numericAnswer})`);
+        
+          // Simpan ke variabel sementara
+          tempAnswer = numericAnswer;
+        
+          // Tampilkan konfirmasi
+          heardAnswer.textContent = `Jawabanmu: ${numericAnswer}`;
+          voiceConfirmation.style.display = "block";
         };
+        if (confirmYes) {
+          confirmYes.addEventListener("click", () => {
+            if (tempAnswer !== null) {
+              checkAnswer(tempAnswer);
+              tempAnswer = null;
+              voiceConfirmation.style.display = "none";
+            }
+          });
+        }
+        
+        if (confirmRetry) {
+          confirmRetry.addEventListener("click", () => {
+            tempAnswer = null;
+            voiceConfirmation.style.display = "none";
+            microphone.click(); // Mulai lagi
+          });
+        }
+                
 
         recognition.onspeechend = () => {
           recognition.stop();

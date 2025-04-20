@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
       musicButton = document.createElement("button");
       musicButton.id = "music-toggle";
       musicButton.style.position = "fixed";
-      musicButton.style.top = "20px";      // Sejajar leaderboard
-      musicButton.style.right = "90px";    // Geser ke kiri dari leaderboard
+      musicButton.style.top = "20px";      
+      musicButton.style.right = "165px";    // Geser ke kiri dari leaderboard
       musicButton.style.zIndex = "1000";
-      musicButton.style.width = "50px";    // Samakan dengan leaderboard
-      musicButton.style.height = "50px";   // Samakan dengan leaderboard
+      musicButton.style.width = "50px";    
+      musicButton.style.height = "50px";   
       musicButton.style.background = "none";
       musicButton.style.border = "none";
       musicButton.style.cursor = "pointer";

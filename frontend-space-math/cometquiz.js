@@ -80,3 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("🎯 Listener gameFinished telah diaktifkan!");
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("instruction-btn");
+  const popup = document.getElementById("instruction-popup");
+  const video = document.getElementById("instruction-video");
+  const closeBtn = document.getElementById("close-instruction");
+
+  btn.addEventListener("click", () => {
+    popup.style.display = "flex";
+    video.currentTime = 0;
+    video.play();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    video.pause();
+    popup.style.display = "none";
+  });
+});
