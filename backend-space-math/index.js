@@ -94,4 +94,8 @@ async function startServer() {
 }
 
 startServer();
+app.get("/api/test", (req, res) => {
+    res.json({ message: "✅ Backend aktif dan merespon dengan baik!" });
+});
+
 
