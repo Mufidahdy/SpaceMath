@@ -4,18 +4,19 @@ const cors = require("cors");
 const moment = require("moment");
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
 
 // 🔹 Koneksi ke MySQL dengan `async/await`
 const dbConfig = {
-    host: "localhost",
-    user: "root", // Sesuaikan dengan user MySQL kamu
-    password: "", // Sesuaikan dengan password MySQL kamu
-    database: "space_math", // Sesuaikan dengan database kamu
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
 };
+
 
 let db;
 async function connectDB() {
