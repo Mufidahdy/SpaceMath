@@ -76,7 +76,22 @@ app.get("/get-leaderboard", async (req, res) => {
     }
 });
 
-// 🔹 Jalankan server
-app.listen(port, () => {
-    console.log(`🚀 Server berjalan di http://localhost:${port}`);
+// 🔹 Route test
+app.get("/api/test", (req, res) => {
+    res.send("✅ Backend nyala dan bisa diakses!");
 });
+
+// 🔹 Jalankan server setelah konek DB
+async function startServer() {
+    try {
+        await connectDB();
+        app.listen(port, () => {
+            console.log(`🚀 Server berjalan di http://localhost:${port}`);
+        });
+    } catch (error) {
+        console.error("❌ Gagal start server:", error);
+    }
+}
+
+startServer();
+
