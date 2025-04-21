@@ -16,6 +16,8 @@ const dbConfig = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
 };
+console.log("📌 ENV CONFIG:", dbConfig);
+
 
 
 let db;
