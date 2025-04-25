@@ -5,7 +5,12 @@ const cors = require("cors");
 const moment = require("moment");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 
 app.use(express.json());
 app.use(cors());
