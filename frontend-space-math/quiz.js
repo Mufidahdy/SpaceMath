@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => { popup.remove(); }, 3000);
 
     // Kirim skor ke backend (opsional)
-    fetch("http://localhost:5000/submit-score", {
+    fetch("https://spacemath-production.up.railway.app/submit-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

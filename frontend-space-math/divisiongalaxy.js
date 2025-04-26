@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fungsi untuk menyimpan skor ke database
   async function saveScore() {
       try {
-          const response = await fetch("http://localhost:5000/submit-score", {
+          const response = await fetch("https://spacemath-production.up.railway.app/submit-score", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ nama_pemain, menu, skor })

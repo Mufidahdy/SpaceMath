@@ -101,7 +101,7 @@ async function startServer() {
   try {
     await connectDB();
     app.listen(PORT, () => {
-      console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+      console.log(`🚀 Server berjalan di https://spacemath-production.up.railway.app:${PORT}`);
     });
   } catch (error) {
     console.error("❌ Gagal start server:", error);

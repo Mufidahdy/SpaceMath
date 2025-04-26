@@ -52,7 +52,7 @@
                     playButton.style.visibility = "visible";
 
                     // Kirim data ke backend (sementara menu & skor diisi default dulu)
-                    fetch("http://localhost:5000/submit-score", { // Ubah URL ke /submit-score
+                    fetch("https://spacemath-production.up.railway.app/submit-score", { // Ubah URL ke /submit-score
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

@@ -45,7 +45,7 @@ usernameInput.addEventListener("keydown", function (event) {
             playButton.style.visibility = "visible"; // Ubah dari display:block ke visibility:visible
 
             // Kirim data ke backend dengan default nilai skor & waktu
-            fetch("http://localhost:5000/submit-score", { // Ganti dengan endpoint yang benar
+            fetch("https://spacemath-production.up.railway.app/submit-score", { // Ganti dengan endpoint yang benar
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 

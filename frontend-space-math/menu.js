@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("📢 Game yang dipilih:", selectedMenu);
 
     try {
-      const response = await fetch(`http://localhost:5000/get-leaderboard?menu=${selectedMenu}`);
+      const response = await fetch(`https://spacemath-production.up.railway.app/get-leaderboard?menu=${selectedMenu}`);
       const data = await response.json();
 
       leaderboardList.innerHTML = "";
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       console.log(`📡 Mengirim skor ke backend: ${nama_pemain} - ${skor} - ${menu}`);
 
-      const response = await fetch("http://localhost:5000/save-score", {
+      const response = await fetch("https://spacemath-production.up.railway.app/save-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

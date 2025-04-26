@@ -259,7 +259,7 @@ let tempAnswer = null;
     if (currentQuestionIndex === 0 || attempts === 0) return;
     const finalScore = calculateFinalScore().toFixed(2);
 
-    fetch("http://localhost:5000/submit-score", {
+    fetch("https://spacemath-production.up.railway.app/submit-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
