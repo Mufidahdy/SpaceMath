@@ -5,17 +5,18 @@ const cors = require("cors");
 const moment = require("moment");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // ✅ ini variabel port-nya udah benar!
 
 app.use(express.json());
 app.use(cors());
 
+// 🔹 Konfigurasi DB dari file .env
 const dbConfig = {
-  host: 'mysql.railway.internal',
-  user: 'root',
-  password: 'jAjwqrPdBbbWHKlkpCKBWoGXWMWNFWNI',
-  database: 'railway',
-  port: process.env.DB_PORT || 3306
+  host: 'mysql.railway.internal',     // isi dari Railway
+  user: 'root',     // isi dari Railway
+  password: 'jAjwqrPdBbbWHKlkpCKBWoGXWMWNFWNI', // isi dari Railway
+  database: 'railway', // isi dari Railway
+  port: process.env.DB_PORT || 3306 // default MySQL port
 };
 
 console.log("📌 ENV CONFIG:", dbConfig);
@@ -32,8 +33,8 @@ async function connectDB() {
     });
     console.log("✅ Terhubung ke database MySQL Railway");
   } catch (error) {
-    console.error("❌ Gagal koneksi database:", error.message);
-    throw error;
+    console.error("❌ Koneksi database gagal:", error);
+    process.exit(1);
   }
 }
 
@@ -67,8 +68,8 @@ app.post("/submit-score", async (req, res) => {
   }
 });
 
-// 🔹 Endpoint leaderboard (route yang bener!)
-app.get("/api/leaderboard", async (req, res) => {
+// 🔹 Endpoint leaderboard
+app.get("/get-leaderboard", async (req, res) => {
   const menu = req.query.menu;
 
   if (!menu) {
@@ -98,7 +99,22 @@ app.get("/cek", (req, res) => {
   res.send("✅ Backend Space Math aktif!");
 });
 
-// 🔹 Start server
+
+// 🔹 Jalankan server
+async function connectDB() {
+  try {
+    db = await mysql.createPool({
+      ...dbConfig,
+      waitForConnections: true,
+      connectionLimit: 10,
+    });
+    console.log("✅ Terhubung ke database MySQL Railway");
+  } catch (error) {
+    console.error("❌ Gagal koneksi database:", error.message);
+    throw error; // Penting! Biar kalau gagal connect, langsung ketahuan error-nya
+  }
+}
+
 async function startServer() {
   app.listen(PORT, async () => {
     try {
@@ -109,5 +125,6 @@ async function startServer() {
     }
   });
 }
+
 
 startServer();
