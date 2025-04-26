@@ -50,7 +50,7 @@ app.post("/submit-score", async (req, res) => {
 
     const waktuFormatted = moment(waktu).format("YYYY-MM-DD HH:mm:ss");
 
-    const query = "INSERT INTO nilai (nama_pemain, menu, skor, waktu2) VALUES (?, ?, ?, ?)"; // <- waktu2
+    const query = "INSERT INTO nilai2 (nama_pemain, menu, skor, waktu) VALUES (?, ?, ?, ?)";
     await db.execute(query, [nama_pemain, menu, skor, waktuFormatted]);
 
     res.json({
@@ -73,7 +73,7 @@ app.get("/get-leaderboard", async (req, res) => {
 
   try {
     const [rows] = await db.execute(
-      "SELECT nama_pemain, skor FROM nilai WHERE menu = ? ORDER BY skor DESC, waktu2 ASC LIMIT 5", // <- waktu2
+      "SELECT nama_pemain, skor FROM nilai2 WHERE menu = ? ORDER BY skor DESC, waktu ASC LIMIT 5",
       [menu]
     );
 
