@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log(`📡 Mengirim skor ke backend: ${nama_pemain} - ${skor} - ${menu}`);
 
-      const response = await fetch("https://spacemath-production.up.railway.app/submit-score", {
+      const response = await fetch("https://space-math-pzag.vercel.app/submit-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🔹 Fungsi untuk memperbarui leaderboard
   function updateLeaderboard() {
-    fetch("https://spacemath-production.up.railway.app/leaderboard")
+    fetch("https://space-math-pzag.vercel.app/leaderboard")
       .then((response) => response.json())
       .then((data) => {
         const leaderboardContainer = document.getElementById("leaderboard");

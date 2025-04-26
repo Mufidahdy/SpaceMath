@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function saveScoreToDatabase(skor) {
-    fetch("https://spacemath-production.up.railway.app/submit-score", {
+    fetch("https://space-math-pzag.vercel.app/submit-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nama_pemain, menu, skor, waktu: new Date().toISOString() })

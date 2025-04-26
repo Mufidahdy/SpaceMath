@@ -21,7 +21,7 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
 
         try {
             // Panggil API dari backend
-            const response = await fetch(`https://spacemath-production.up.railway.app/get-leaderboard?menu=${selectedGame}`);
+            const response = await fetch(`https://space-math-pzag.vercel.app/get-leaderboard?menu=${selectedGame}`);
             const leaderboardData = await response.json();
 
             // Bersihkan daftar leaderboard
