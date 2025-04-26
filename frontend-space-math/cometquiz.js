@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log(`📡 Mengirim skor ke backend: ${nama_pemain} - ${skor} - ${menu}`);
 
-      const response = await fetch("https://space-math-pzag.vercel.app/api/submit-score", {
+      const response = await fetch("https://space-math-pzag.vercel.app/submit-score", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
