@@ -21,33 +21,35 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
 
         try {
             // Panggil API dari backend
-            const response = await fetch(`https://space-math-pzag.vercel.app/get-leaderboard?menu=${selectedGame}`);
-            const leaderboardData = await response.json();
+            // Panggil API dari backend
+const response = await fetch(`https://space-math-pzag.vercel.app/api/leaderboard?menu=${selectedGame}`);
+const leaderboardData = await response.json();
 
-            // Bersihkan daftar leaderboard
-            leaderboardList.innerHTML = "";
+// Bersihkan daftar leaderboard
+leaderboardList.innerHTML = "";
 
-            if (leaderboardData.length === 0) {
-                let listItem = document.createElement("li");
-                listItem.textContent = "Belum ada skor untuk game ini.";
-                leaderboardList.appendChild(listItem);
-                return;
-            }
-            if (!Array.isArray(leaderboardData)) {
-                console.error("❌ Data leaderboard tidak valid:", leaderboardData);
-                return;
-            }
-            
-            // Tampilkan daftar leaderboard
-            leaderboardData.forEach((pemain, index) => {
-                let listItem = document.createElement("li");
-                listItem.textContent = `${index + 1}. ${pemain.nama_pemain} - Skor: ${pemain.skor} - Waktu: ${pemain.waktu}s`;
-                leaderboardList.appendChild(listItem);
-            });
-            document.querySelector(".popup-content h2").textContent = `Leaderboard - ${selectedGame}`;
+if (leaderboardData.length === 0) {
+    let listItem = document.createElement("li");
+    listItem.textContent = "Belum ada skor untuk game ini.";
+    leaderboardList.appendChild(listItem);
+    return;
+}
+if (!Array.isArray(leaderboardData)) {
+    console.error("❌ Data leaderboard tidak valid:", leaderboardData);
+    return;
+}
 
-            // Tampilkan pop-up leaderboard
-            leaderboardPopup.style.display = "block";
+// Tampilkan daftar leaderboard
+leaderboardData.forEach((pemain, index) => {
+    let listItem = document.createElement("li");
+    listItem.textContent = `${index + 1}. ${pemain.nama_pemain} - Skor: ${pemain.skor}`;
+    leaderboardList.appendChild(listItem);
+});
+document.querySelector(".popup-content h2").textContent = `Leaderboard - ${selectedGame}`;
+
+// Tampilkan pop-up leaderboard
+leaderboardPopup.style.display = "block";
+
 
         } catch (error) {
             console.error("❌ Gagal mengambil leaderboard:", error);
