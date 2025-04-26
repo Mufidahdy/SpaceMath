@@ -12,10 +12,10 @@ app.use(cors());
 
 // 🔹 Konfigurasi DB dari file .env
 const dbConfig = {
-  host: process.env.DB_HOST,     // isi dari Railway
-  user: process.env.DB_USER,     // isi dari Railway
-  password: process.env.DB_PASSWORD, // isi dari Railway
-  database: process.env.DB_NAME, // isi dari Railway
+  host: 'mysql.railway.internal',     // isi dari Railway
+  user: 'root',     // isi dari Railway
+  password: 'jAjwqrPdBbbWHKlkpCKBWoGXWMWNFWNI', // isi dari Railway
+  database: 'railway', // isi dari Railway
   port: process.env.DB_PORT || 3306 // default MySQL port
 };
 
