@@ -5,25 +5,25 @@ const cors = require("cors");
 const moment = require("moment");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // ✅ ini variabel port-nya udah benar!
 
 app.use(express.json());
 app.use(cors());
 
 // 🔹 Konfigurasi DB dari file .env
 const dbConfig = {
-  host: 'mysql.railway.internal',    // dari Railway
-  user: 'root',                      // dari Railway
-  password: 'jAjwqrPdBbbWHKlkpCKBWoGXWMWNFWNI', // dari Railway
-  database: 'railway',               // dari Railway
-  port: process.env.DB_PORT || 3306
+  host: 'mysql.railway.internal',     // isi dari Railway
+  user: 'root',     // isi dari Railway
+  password: 'jAjwqrPdBbbWHKlkpCKBWoGXWMWNFWNI', // isi dari Railway
+  database: 'railway', // isi dari Railway
+  port: process.env.DB_PORT || 3306 // default MySQL port
 };
 
 console.log("📌 ENV CONFIG:", dbConfig);
 
 let db;
 
-// 🔹 Koneksi ke database dan buat tabel kalau belum ada
+// 🔹 Koneksi ke database
 async function connectDB() {
   try {
     db = await mysql.createPool({
@@ -32,26 +32,13 @@ async function connectDB() {
       connectionLimit: 10,
     });
     console.log("✅ Terhubung ke database MySQL Railway");
-
-    // 🔥 AUTO CREATE TABEL kalau belum ada
-    await db.execute(`
-      CREATE TABLE IF NOT EXISTS nilai (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nama_pemain VARCHAR(255) NOT NULL,
-        menu VARCHAR(255) NOT NULL,
-        skor INT NOT NULL,
-        waktu TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-    console.log("✅ Tabel 'nilai' sudah siap!");
-
   } catch (error) {
     console.error("❌ Koneksi database gagal:", error);
     process.exit(1);
   }
 }
 
-// 🔹 Endpoint untuk submit skor
+// 🔹 Endpoint untuk menyimpan skor
 app.post("/submit-score", async (req, res) => {
   try {
     const { nama_pemain, menu, skor, waktu } = req.body;
@@ -108,17 +95,36 @@ app.get("/get-leaderboard", async (req, res) => {
 app.get("/api/test", (req, res) => {
   res.json({ message: "✅ Backend aktif dan merespon dengan baik!" });
 });
+app.get("/cek", (req, res) => {
+  res.send("✅ Backend Space Math aktif!");
+});
+
 
 // 🔹 Jalankan server
-async function startServer() {
+async function connectDB() {
   try {
-    await connectDB();
-    app.listen(PORT, () => {
-      console.log(`🚀 Server berjalan di https://spacemath-production.up.railway.app:${PORT}`);
+    db = await mysql.createPool({
+      ...dbConfig,
+      waitForConnections: true,
+      connectionLimit: 10,
     });
+    console.log("✅ Terhubung ke database MySQL Railway");
   } catch (error) {
-    console.error("❌ Gagal start server:", error);
+    console.error("❌ Gagal koneksi database:", error.message);
+    throw error; // Penting! Biar kalau gagal connect, langsung ketahuan error-nya
   }
 }
+
+async function startServer() {
+  app.listen(PORT, async () => {
+    try {
+      await connectDB();
+      console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
+    } catch (error) {
+      console.error("❌ Error saat koneksi DB:", error.message);
+    }
+  });
+}
+
 
 startServer();
