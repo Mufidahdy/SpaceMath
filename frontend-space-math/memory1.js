@@ -259,7 +259,7 @@ let tempAnswer = null;
     if (currentQuestionIndex === 0 || attempts === 0) return;
     const finalScore = calculateFinalScore().toFixed(2);
 
-    fetch("https://space-math-pzag.vercel.app/submit-score", {
+    fetch("https://space-math-pzag.vercel.app/api/submit-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

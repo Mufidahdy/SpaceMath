@@ -95,7 +95,7 @@ function showFinalScore() {
   setTimeout(() => { popup.remove(); }, 3000);
 
   // Kirim skor ke backend
-  fetch("https://space-math-pzag.vercel.app/submit-score", {
+  fetch("https://space-math-pzag.vercel.app/api/submit-score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
