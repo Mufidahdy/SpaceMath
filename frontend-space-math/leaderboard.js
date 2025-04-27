@@ -41,7 +41,7 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
             // Tampilkan daftar leaderboard
             leaderboardData.forEach((pemain, index) => {
                 let listItem = document.createElement("li");
-                listItem.textContent = `${index + 1}. ${pemain.nama_pemain} - Skor: ${pemain.skor} - Waktu: ${pemain.waktu}s`;
+                listItem.textContent = `${index + 1}. ${pemain.nama_pemain} - Skor: ${pemain.skor}`;
                 leaderboardList.appendChild(listItem);
             });
             document.querySelector(".popup-content h2").textContent = `Leaderboard - ${selectedGame}`;
