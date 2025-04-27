@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const mysql = require("mysql2/promise");
+const { createClient } = require('@supabase/supabase-js'); // Import Supabase
 const cors = require("cors");
 const moment = require("moment");
 
@@ -11,30 +11,19 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// 🔹 Konfigurasi Database
-const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 3306,
-};
+// 🔹 Konfigurasi Supabase
+const supabaseUrl = 'https://jtubewfggxignzizlaaa.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dWJld2ZnZ3hpZ256aXpsYWFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NTk1OTEsImV4cCI6MjA2MTMzNTU5MX0.elLZ32i3AoOcsbDWiZkzl48AN_ExN_Or0OEUm9Z9wJM';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-console.log("📌 ENV CONFIG:", dbConfig);
+console.log("📌 Supabase Config:", { supabaseUrl, supabaseKey });
 
-let db;
-
-// 🔹 Fungsi koneksi ke Database
+// 🔹 Fungsi koneksi ke Supabase
 async function connectDB() {
   try {
-    db = await mysql.createPool({
-      ...dbConfig,
-      waitForConnections: true,
-      connectionLimit: 10,
-    });
-    console.log("✅ Terhubung ke database MySQL Railway");
+    console.log("✅ Terhubung ke Supabase");
   } catch (error) {
-    console.error("❌ Gagal koneksi database:", error.message);
+    console.error("❌ Gagal koneksi Supabase:", error.message);
     process.exit(1);
   }
 }
@@ -50,8 +39,15 @@ app.post("/submit-score", async (req, res) => {
 
     const waktuFormatted = moment(waktu).format("YYYY-MM-DD HH:mm:ss");
 
-    const query = "INSERT INTO nilai2 (nama_pemain, menu, skor, waktu) VALUES (?, ?, ?, ?)";
-    await db.execute(query, [nama_pemain, menu, skor, waktuFormatted]);
+    const { data, error } = await supabase
+      .from('nilai') // Ganti dengan nama tabel Supabase kamu
+      .insert([
+        { nama_pemain, menu, skor, waktu: waktuFormatted }
+      ]);
+
+    if (error) {
+      throw error;
+    }
 
     res.json({
       message: "✅ Skor berhasil disimpan!",
@@ -72,12 +68,18 @@ app.get("/get-leaderboard", async (req, res) => {
   }
 
   try {
-    const [rows] = await db.execute(
-      "SELECT nama_pemain, skor FROM nilai2 WHERE menu = ? ORDER BY skor DESC, waktu ASC LIMIT 5",
-      [menu]
-    );
+    const { data, error } = await supabase
+      .from('nilai') // Ganti dengan nama tabel Supabase kamu
+      .select('nama_pemain, skor')
+      .eq('menu', menu)
+      .order('skor', { ascending: false })
+      .limit(5);
 
-    res.json(rows);
+    if (error) {
+      throw error;
+    }
+
+    res.json(data);
   } catch (error) {
     console.error("❌ Error mengambil leaderboard:", error);
     res.status(500).json({ error: "Terjadi kesalahan server." });
