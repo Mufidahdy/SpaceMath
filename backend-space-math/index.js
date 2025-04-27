@@ -11,29 +11,24 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors());
 
-// 🔹 Konfigurasi Supabase dari environment variables
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+// 🔹 Konfigurasi Supabase
+const supabaseUrl = 'https://jtubewfggxignzizlaaa.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dWJld2ZnZ3hpZ256aXpsYWFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NTk1OTEsImV4cCI6MjA2MTMzNTU5MX0.elLZ32i3AoOcsbDWiZkzl48AN_ExN_Or0OEUm9Z9wJM';
+const supabase = createClient('https://jtubewfggxignzizlaaa.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dWJld2ZnZ3hpZ256aXpsYWFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NTk1OTEsImV4cCI6MjA2MTMzNTU5MX0.elLZ32i3AoOcsbDWiZkzl48AN_ExN_Or0OEUm9Z9wJM');
 
-// Fungsi untuk menyimpan skor
+console.log("📌 Supabase Config:", { supabaseUrl, supabaseKey });
+
+// 🔹 Fungsi koneksi ke Supabase
 async function saveScore(nama_pemain, menu, skor, waktu) {
-  try {
-    const waktuFormatted = moment(waktu).format("YYYY-MM-DD HH:mm:ss");
-    const { data, error } = await supabase
+  const { data, error } = await supabase
       .from('nilai')
-      .insert([{ nama_pemain, menu, skor, waktu: waktuFormatted }]);
+      .insert([{ nama_pemain, menu, skor, waktu }]);
 
-    if (error) {
-      throw error;
-    }
-
-    console.log("✅ Skor berhasil disimpan:", data);
-    return data; // Mengembalikan data yang berhasil disimpan
-  } catch (error) {
-    console.error("❌ Gagal menyimpan skor:", error.message);
-    throw new Error("Gagal menyimpan skor ke database.");
+  if (error) {
+      console.error("❌ Gagal menyimpan skor:", error.message);
+      throw new Error("Gagal menyimpan skor ke database.");
   }
+  console.log("✅ Skor berhasil disimpan:", data);
 }
 
 // 🔹 Endpoint untuk submit skor
@@ -41,28 +36,36 @@ app.post("/submit-score", async (req, res) => {
   try {
     const { nama_pemain, menu, skor, waktu } = req.body;
 
-    // Validasi data
     if (!nama_pemain || !menu || skor === undefined || !waktu) {
       return res.status(400).json({ error: "Data tidak lengkap!" });
     }
 
-    // Menyimpan skor ke Supabase
-    const savedScore = await saveScore(nama_pemain, menu, skor, waktu);
+    const waktuFormatted = moment(waktu).format("YYYY-MM-DD HH:mm:ss");
+
+    const { data, error } = await supabase
+      .from('nilai') // Ganti dengan nama tabel Supabase kamu
+      .insert([
+        { nama_pemain, menu, skor, waktu: waktuFormatted }
+      ]);
+
+    if (error) {
+      throw error;
+    }
+
     res.json({
       message: "✅ Skor berhasil disimpan!",
-      data: savedScore,
+      data: { nama_pemain, menu, skor, waktuFormatted },
     });
   } catch (error) {
     console.error("❌ Gagal menyimpan skor:", error);
-    res.status(500).json({ error: "Gagal menyimpan skor ke database.", detail: error.message });
+    res.status(500).json({ error: "Gagal menyimpan skor ke database." });
   }
 });
 
-// 🔹 Endpoint untuk mendapatkan leaderboard
+// 🔹 Endpoint untuk get leaderboard
 app.get("/get-leaderboard", async (req, res) => {
   const menu = req.query.menu;
 
-  // Validasi parameter menu
   if (!menu) {
     return res.status(400).json({ error: "Menu tidak valid! Kirimkan parameter menu." });
   }
@@ -99,6 +102,7 @@ app.get("/cek", (req, res) => {
 // 🔹 Start Server
 async function startServer() {
   try {
+    await connectDB();
     app.listen(PORT, () => {
       console.log(`🚀 Server berjalan di http://localhost:${PORT}`);
     });
