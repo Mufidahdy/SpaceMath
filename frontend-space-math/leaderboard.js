@@ -24,6 +24,12 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
             const response = await fetch(`https://space-math-pzag.vercel.app/get-leaderboard?menu=${selectedGame}`);
             const leaderboardData = await response.json();
 
+            // Cek apakah response valid
+            if (!Array.isArray(leaderboardData)) {
+                console.error("❌ Data leaderboard tidak valid:", leaderboardData);
+                return;
+            }
+
             // Bersihkan daftar leaderboard
             leaderboardList.innerHTML = "";
 
@@ -33,17 +39,15 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
                 leaderboardList.appendChild(listItem);
                 return;
             }
-            if (!Array.isArray(leaderboardData)) {
-                console.error("❌ Data leaderboard tidak valid:", leaderboardData);
-                return;
-            }
-            
+
             // Tampilkan daftar leaderboard
             leaderboardData.forEach((pemain, index) => {
                 let listItem = document.createElement("li");
                 listItem.textContent = `${index + 1}. ${pemain.nama_pemain} - Skor: ${pemain.skor}`;
                 leaderboardList.appendChild(listItem);
             });
+
+            // Update judul pop-up dengan nama game yang dipilih
             document.querySelector(".popup-content h2").textContent = `Leaderboard - ${selectedGame}`;
 
             // Tampilkan pop-up leaderboard
@@ -51,6 +55,7 @@ if (!leaderboardBtn || !leaderboardPopup || !closeLeaderboard || !leaderboardLis
 
         } catch (error) {
             console.error("❌ Gagal mengambil leaderboard:", error);
+            alert("Terjadi kesalahan saat mengambil data leaderboard. Coba lagi nanti.");
         }
     }
 
