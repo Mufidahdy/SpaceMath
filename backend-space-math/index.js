@@ -20,15 +20,15 @@ console.log("📌 Supabase Config:", { supabaseUrl, supabaseKey });
 
 // 🔹 Fungsi koneksi ke Supabase
 async function saveScore(nama_pemain, menu, skor, waktu) {
-  const { data, error } = await supabase
-      .from('nilai')
-      .insert([{ nama_pemain, menu, skor, waktu }]);
+    const { data, error } = await supabase
+        .from('nilai')
+        .insert([{ nama_pemain, menu, skor, waktu }]);
 
-  if (error) {
-      console.error("❌ Gagal menyimpan skor:", error.message);
-      throw new Error("Gagal menyimpan skor ke database.");
-  }
-  console.log("✅ Skor berhasil disimpan:", data);
+    if (error) {
+        console.error("❌ Gagal menyimpan skor:", error.message);
+        throw new Error("Gagal menyimpan skor ke database.");
+    }
+    console.log("✅ Skor berhasil disimpan:", data);
 }
 
 // 🔹 Endpoint untuk submit skor
@@ -72,7 +72,7 @@ app.get("/get-leaderboard", async (req, res) => {
 
   try {
     const { data, error } = await supabase
-      .from('nilai')
+      .from('nilai') // Ganti dengan nama tabel Supabase kamu
       .select('nama_pemain, skor')
       .eq('menu', menu)
       .order('skor', { ascending: false })
